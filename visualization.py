@@ -23,6 +23,7 @@ zone_x_min_door,zone_y_min_door,zone_x_max_door,zone_y_max_door = 631,308,674,41
 zone_x_min_alchol,zone_y_min_alchol,zone_x_max_alchol,zone_y_max_alchol = 430,329,470,356
 zone_x_min_roi,zone_y_min_roi,zone_x_max_roi,zone_y_max_roi = 160,130,697,721
 
+#Mid points of different zones
 mid_x_patient = int((zone_x_min_patient+zone_x_max_patient)/2.0)
 mid_y_patient = int((zone_y_min_patient+zone_y_max_patient)/2.0)
 
