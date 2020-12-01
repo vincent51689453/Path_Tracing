@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+#pip install mplcursors
+import mplcursors
 
 #Visualized pixel size
 pixel_offset = 5
@@ -69,24 +71,29 @@ def plot_all_distance(dist_patient,dist_rub,dist_wash):
     plt.subplots_adjust(wspace=0.6,hspace=0.4)
 
     plt.subplot(2,2,1)
-    plt.plot(dist_patient)
+    line1 = plt.plot(dist_patient)
     plt.title("Self_2_Patient")
     plt.xlabel("Data sequence")
     plt.ylabel("Distance")
     plt.grid()
 
     plt.subplot(2,2,2)
-    plt.plot(dist_rub)
+    line2 = plt.plot(dist_rub)
     plt.title("Self_2_Hand Rub")
     plt.xlabel("Data sequence")
     plt.ylabel("Distance")
     plt.grid()
 
     plt.subplot(2,2,3)
-    plt.plot(dist_wash)
+    line3 = plt.plot(dist_wash)
     plt.title("Self_2_Wash Bin")
     plt.xlabel("Data sequence")
     plt.ylabel("Distance")
     plt.grid()
+
+    #Interative marker on graph
+    mplcursors.cursor(line1)
+    mplcursors.cursor(line2)
+    mplcursors.cursor(line3)
 
     plt.show()
