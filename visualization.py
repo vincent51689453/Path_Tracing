@@ -73,7 +73,7 @@ def background_creation(image_width,image_height):
 def plot_all_distance(dist_patient,dist_rub,dist_wash):
     #It only plot distance
 
-    plt.subplots_adjust(wspace=0.6,hspace=0.4)
+    plt.subplots_adjust(wspace=0.4,hspace=0.4)
 
     plt.subplot(2,2,1)
     line1 = plt.plot(dist_patient)
