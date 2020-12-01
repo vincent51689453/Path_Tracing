@@ -7,7 +7,7 @@ A path tracing application for hygiene procedure monitoring
 
 ![image](https://github.com/vincent51689453/Path_Tracing/blob/main/output/single_id_trace.JPG)
 
-![image](https://github.com/vincent51689453/Path_Tracing/blob/main/output/single_id_plot.JPG)
+![image](https://github.com/vincent51689453/Path_Tracing/blob/main/output/single_id_plot_LPF.JPG)
 
 2. single_id_overlay.py: It is a script to overlay all the results from different log file (same id) and visualize it. You need to set **i and j** to indicate the starting log_file and the ending log_file to overlay.
 
