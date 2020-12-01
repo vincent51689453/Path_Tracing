@@ -24,6 +24,10 @@ grad_rub = []
 
 #Staff status
 self_hygiene = False
+contact_compliance = 0
+contact_incompliance = 0
+leave_compliance = 0
+leave_incompliance = 0
 
 #low pass filter
 T = 5.0       #Sample period
@@ -74,7 +78,7 @@ def color_info(event,x,y,flag,param):
         print("Gradients -> Patient = {} | -> Wash Bin = {} | -> Hand Rub = {}".format(a,c,b))
         print("Distnaces -> Patient = {} | -> Wash Bin = {} | -> Hand Rub = {}\r\n".format(d,f,e))
 
-#Read log file (x,y)
+#1. Read log file (x,y)
 with open(log_file_path) as log_file:
     log_analyzer = csv.reader(log_file)
     for row in log_analyzer:
@@ -84,7 +88,7 @@ with open(log_file_path) as log_file:
         locations.append((loc_x,loc_y,clean))
         max_num_record += 1
 
-#Visualize on an image
+#2. Visualize on an image
 image = vs.background_creation(camera_width,camera_height)
 for counter in range(0,max_num_record):
     #Get data one by one
@@ -125,24 +129,32 @@ for counter in range(0,max_num_record):
     cv2.waitKey(50)
 
 
-#Low pass filter after go through all the data
+#3. Low pass filter after go through all the data
 dist_patient_np = np.array(dist_patient)
 dist_rub_np = np.array(dist_rub)
 dist_wash_np = np.array(dist_wash)
+grad_patient_np = np.array(grad_patient)
+grad_rub_np = np.array(grad_rub)
+grad_wash_np = np.array(grad_wash)
 
-print(dist_patient_np.shape)
 LPF_patient = butter_lowpass_filter(dist_patient_np,cutoff,fs,order)
 LPF_rub = butter_lowpass_filter(dist_rub_np,cutoff,fs,order)
 LPF_wash = butter_lowpass_filter(dist_wash_np,cutoff,fs,order)
+
+LPF_G_patient = butter_lowpass_filter(grad_patient_np,cutoff,fs,order)
+LPF_G_rub = butter_lowpass_filter(grad_rub_np,cutoff,fs,order)
+LPF_G_wash = butter_lowpass_filter(grad_rub_np,cutoff,fs,order)
 
 
 #Plot distances
 #vs.plot_all_distance(dist_patient,dist_rub,dist_wash)
 
-#Plot distances / gradients / LPF
+#4. Plot distances / gradients / LPF
 vs.plot_all_distance_gradient(dist_patient,dist_rub,dist_wash,\
                             grad_patient,grad_rub,grad_wash,\
-                            LPF_patient,LPF_rub,LPF_wash)
+                            LPF_patient,LPF_rub,LPF_wash,\
+                            LPF_G_patient,LPF_G_rub,LPF_G_wash)
+
 
 print("Done!")
 cv2.waitKey(0)

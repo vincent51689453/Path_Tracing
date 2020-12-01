@@ -10,9 +10,10 @@ camera_width,camera_height = 800,800
 log_file_path_1 = "./log_file_"
 log_file_path_2 = "/path_log.csv"
 
-#Number of csv file
-num_csv = 5
-i = 1
+#Index of csv file
+num_csv = 0
+#Starting and ending csv file
+i,j = 6,10
 
 def color_info(event,x,y,flag,param):
     #When Left is clicked in the mouse
@@ -23,7 +24,7 @@ def color_info(event,x,y,flag,param):
 #Create image template
 image = vs.background_creation(camera_width,camera_height)
 
-while(i<=num_csv):
+while(i<=j):
     #Location record
     locations = []
     #Total number of record
@@ -60,7 +61,7 @@ while(i<=num_csv):
             cv2.putText(image,"1",(loc_x-vs.pixel_offset,loc_y-vs.pixel_offset),cv2.FONT_HERSHEY_SIMPLEX,0.5,vs.handwash_pixel_color,1)
             image[loc_y:(loc_y+vs.pixel_offset),loc_x:(loc_x+vs.pixel_offset)] = vs.handwash_pixel_color
         #Indicating other points
-        image[loc_y:(loc_y+vs.pixel_offset),loc_x:(loc_x+vs.pixel_offset)] = vs.label_pixel_color[i-1]
+        image[loc_y:(loc_y+vs.pixel_offset),loc_x:(loc_x+vs.pixel_offset)] = vs.label_pixel_color[num_csv]
 
 
         window_title = 'Path Overlay Tracking [' + str(i) + ']'
@@ -68,7 +69,8 @@ while(i<=num_csv):
         cv2.setMouseCallback(window_title,color_info)  
         cv2.waitKey(50)
     
-    i+=1
+    num_csv += 1
+    i += 1
 
 print("Done!")
 cv2.waitKey(0)

@@ -30,7 +30,7 @@ def color_info(event,x,y,flag,param):
         print("Chosen Pixel: X->{} Y->{}".format(x,y))
 
 
-#Read log file (x,y)
+#1. Read log file (x,y)
 with open(log_file_path) as log_file:
     log_analyzer = csv.reader(log_file)
     for row in log_analyzer:
@@ -40,7 +40,7 @@ with open(log_file_path) as log_file:
         locations.append((loc_x,loc_y,clean))
         max_num_record += 1
 
-#Visualize on an image
+#2. Visualize on an image
 image = vs.background_creation(camera_width,camera_height)
 for counter in range(0,max_num_record):
     location = locations[counter]
@@ -71,7 +71,7 @@ for counter in range(0,max_num_record):
     cv2.setMouseCallback('Path Tracking:',color_info)  
     cv2.waitKey(50)
 
-#Plot distances
+#3. Plot distances
 vs.plot_all_distance(dist_patient,dist_rub,dist_wash)
 
 print("Done!")

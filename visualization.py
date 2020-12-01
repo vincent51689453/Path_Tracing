@@ -105,7 +105,8 @@ def plot_all_distance(dist_patient,dist_rub,dist_wash):
 
 def plot_all_distance_gradient(dist_patient,dist_rub,dist_wash,\
                                 grad_patient,grad_rub,grad_wash,\
-                                LPF_patient,LPF_rub,LPF_wash):
+                                LPF_patient,LPF_rub,LPF_wash,\
+                                LPF_G_patient,LPF_G_rub,LPF_G_wash):
 
     #It plot distances and gradients (including LPF)                      
     plt.subplots_adjust(wspace=0.4,hspace=0.4)
@@ -115,27 +116,30 @@ def plot_all_distance_gradient(dist_patient,dist_rub,dist_wash,\
     line1 = plt.plot(dist_patient)
     line4 = plt.plot(grad_patient)
     line7 = plt.plot(LPF_patient)
+    line10 = plt.plot(LPF_G_patient)
     plt.title("Self_2_Patient")
     plt.xlabel("Data sequence")
-    plt.legend(['distance','gradient','LPF'])
+    plt.legend(['distance','gradient','LPF_Dist','LPF_Grad'])
     plt.grid()
 
     plt.subplot(2,2,2)
     line2 = plt.plot(dist_rub)
     line5 = plt.plot(grad_rub)
     line8 = plt.plot(LPF_rub)
+    line11 = plt.plot(LPF_G_rub)
     plt.title("Self_2_Hand Rub")
     plt.xlabel("Data sequence")
-    plt.legend(['distance','gradient','LPF'])
+    plt.legend(['distance','gradient','LPF_Dist','LPF_Grad'])
     plt.grid()
 
     plt.subplot(2,2,3)
     line3 = plt.plot(dist_wash)
     line6 = plt.plot(grad_wash)
     line9 = plt.plot(LPF_wash)
+    line12 = plt.plot(LPF_G_wash)
     plt.title("Self_2_Wash Bin")
     plt.xlabel("Data sequence")
-    plt.legend(['distance','gradient','LPF'])
+    plt.legend(['distance','gradient','LPF_Dist','LPF_Grad'])
     plt.grid()
 
     #Interative marker on graph
@@ -148,5 +152,8 @@ def plot_all_distance_gradient(dist_patient,dist_rub,dist_wash,\
     mplcursors.cursor(line7)
     mplcursors.cursor(line8)
     mplcursors.cursor(line9)
-
+    mplcursors.cursor(line10)
+    mplcursors.cursor(line11)
+    mplcursors.cursor(line12)
+    
     plt.show()
