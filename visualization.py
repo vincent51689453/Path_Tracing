@@ -15,6 +15,8 @@ label_pixel_color = [(0,255,0),(255,0,0),(0,0,255),(204,255,204),(255,102,102)]
 start_pixel_color = (255,255,255)
 #Red pixel for label (ending)
 end_pixel_color = (0,0,255)
+#Purple pixel for label (hand wash)
+handwash_pixel_color = (255,153,153)
 
 #Boundary boxes definition
 zone_x_min_patient,zone_y_min_patient,zone_x_max_patient,zone_y_max_patient = 366,369,521,667
