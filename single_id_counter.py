@@ -7,7 +7,7 @@ import math
 #Camera setting
 camera_width,camera_height = 800,800
 #Log file path
-log_file_path = "./log_file_3/path_log.csv"
+log_file_path = "./log_file_1/path_log.csv"
 #Location record
 locations = []
 #Total number of record

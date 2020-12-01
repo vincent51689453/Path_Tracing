@@ -47,6 +47,7 @@ while(i<=num_csv):
         location = locations[counter]
         loc_x,loc_y,clean = location
         loc_x,loc_y = int(loc_x),int(loc_y)
+        clean = int(clean)
 
         #Indicating the starting point
         if(counter == 0):
@@ -54,7 +55,10 @@ while(i<=num_csv):
         #Indicating the ending point
         if(counter == (max_num_record-1)):
             image[loc_y:(loc_y+vs.pixel_offset),loc_x:(loc_x+vs.end_pixel_offset)] = vs.end_pixel_color
-
+        #Indicating the handwash point
+        if(clean == 1):
+            cv2.putText(image,"1",(loc_x-vs.pixel_offset,loc_y-vs.pixel_offset),cv2.FONT_HERSHEY_SIMPLEX,0.5,vs.handwash_pixel_color,1)
+            image[loc_y:(loc_y+vs.pixel_offset),loc_x:(loc_x+vs.pixel_offset)] = vs.handwash_pixel_color
         #Indicating other points
         image[loc_y:(loc_y+vs.pixel_offset),loc_x:(loc_x+vs.pixel_offset)] = vs.label_pixel_color[i-1]
 
