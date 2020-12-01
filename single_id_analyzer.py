@@ -24,6 +24,12 @@ def distance_calculation(self_x,self_y):
     self_2_rub = math.sqrt((self_x-vs.mid_x_alchol)**2+(self_y-vs.mid_y_alchol)**2)
     return self_2_patient,self_2_rub,self_2_wash
 
+def color_info(event,x,y,flag,param):
+    #When Left is clicked in the mouse
+    if event == cv2.EVENT_LBUTTONDOWN:  
+        print("Chosen Pixel: X->{} Y->{}".format(x,y))
+
+
 #Read log file (x,y)
 with open(log_file_path) as log_file:
     log_analyzer = csv.reader(log_file)
@@ -58,11 +64,13 @@ for counter in range(0,max_num_record):
     dist_wash.append(c)
 
     cv2.imshow('Path Tracking:',image)
-    cv2.waitKey(200)
+    cv2.setMouseCallback('Path Tracking:',color_info)  
+    cv2.waitKey(50)
 
 #Plot distances
 vs.plot_all_distance(dist_patient,dist_rub,dist_wash)
 
+print("Done!")
 cv2.waitKey(0)
 cv2.destroyAllWindows
 

@@ -11,8 +11,14 @@ log_file_path_1 = "./log_file_"
 log_file_path_2 = "/path_log.csv"
 
 #Number of csv file
-num_csv = 2
+num_csv = 5
 i = 1
+
+def color_info(event,x,y,flag,param):
+    #When Left is clicked in the mouse
+    if event == cv2.EVENT_LBUTTONDOWN:  
+        print("Chosen Pixel: X->{} Y->{}".format(x,y))
+
 
 #Create image template
 image = vs.background_creation(camera_width,camera_height)
@@ -55,9 +61,11 @@ while(i<=num_csv):
 
         window_title = 'Path Overlay Tracking [' + str(i) + ']'
         cv2.imshow(window_title,image)
+        cv2.setMouseCallback(window_title,color_info)  
         cv2.waitKey(50)
     
     i+=1
 
+print("Done!")
 cv2.waitKey(0)
 cv2.destroyAllWindows
