@@ -117,7 +117,7 @@ def plot_all_distance_gradient(dist_patient,dist_rub,dist_wash,\
 
     plt.subplot(2,2,2)
     line2 = plt.plot(dist_rub)
-    line5 = plt.plot(grad_patient)
+    line5 = plt.plot(grad_rub)
     plt.title("Self_2_Hand Rub")
     plt.xlabel("Data sequence")
     plt.legend(['distance','gradient'])
@@ -125,7 +125,7 @@ def plot_all_distance_gradient(dist_patient,dist_rub,dist_wash,\
 
     plt.subplot(2,2,3)
     line3 = plt.plot(dist_wash)
-    line6 = plt.plot(grad_patient)
+    line6 = plt.plot(grad_wash)
     plt.title("Self_2_Wash Bin")
     plt.xlabel("Data sequence")
     plt.legend(['distance','gradient'])

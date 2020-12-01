@@ -52,8 +52,11 @@ def gradient_calculation(self_x,self_y):
 def color_info(event,x,y,flag,param):
     #When Left is clicked in the mouse
     if event == cv2.EVENT_LBUTTONDOWN:  
+        a,b,c = gradient_calculation(x,y)
+        d,e,f = distance_calculation(x,y)
         print("Chosen Pixel: X->{} Y->{}".format(x,y))
-
+        print("Gradients -> Patient = {} | -> Wash Bin = {} | -> Hand Rub = {}".format(a,c,b))
+        print("Distnaces -> Patient = {} | -> Wash Bin = {} | -> Hand Rub = {}\r\n".format(d,f,e))
 
 #Read log file (x,y)
 with open(log_file_path) as log_file:
