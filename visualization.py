@@ -69,6 +69,8 @@ def background_creation(image_width,image_height):
     return background
 
 def plot_all_distance(dist_patient,dist_rub,dist_wash):
+    #It only plot distance
+
     plt.subplots_adjust(wspace=0.6,hspace=0.4)
 
     plt.subplot(2,2,1)
@@ -96,5 +98,46 @@ def plot_all_distance(dist_patient,dist_rub,dist_wash):
     mplcursors.cursor(line1)
     mplcursors.cursor(line2)
     mplcursors.cursor(line3)
+
+    plt.show()
+
+def plot_all_distance_gradient(dist_patient,dist_rub,dist_wash,\
+                                grad_patient,grad_rub,grad_wash):
+    #It plot distances and gradients                           
+    plt.subplots_adjust(wspace=0.6,hspace=0.4)
+
+    plt.figure(1)
+    plt.subplot(2,2,1)
+    line1 = plt.plot(dist_patient)
+    line4 = plt.plot(grad_patient)
+    plt.title("Self_2_Patient")
+    plt.xlabel("Data sequence")
+    plt.legend(['distance','gradient'])
+    plt.grid()
+
+    plt.subplot(2,2,2)
+    line2 = plt.plot(dist_rub)
+    line5 = plt.plot(grad_patient)
+    plt.title("Self_2_Hand Rub")
+    plt.xlabel("Data sequence")
+    plt.legend(['distance','gradient'])
+    plt.grid()
+
+    plt.subplot(2,2,3)
+    line3 = plt.plot(dist_wash)
+    line6 = plt.plot(grad_patient)
+    plt.title("Self_2_Wash Bin")
+    plt.xlabel("Data sequence")
+    plt.legend(['distance','gradient'])
+    plt.grid()
+
+    #Interative marker on graph
+    mplcursors.cursor(line1)
+    mplcursors.cursor(line2)
+    mplcursors.cursor(line3)
+    mplcursors.cursor(line4)
+    mplcursors.cursor(line5)
+    mplcursors.cursor(line6)
+
 
     plt.show()
