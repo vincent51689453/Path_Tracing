@@ -4,6 +4,7 @@ import numpy as np
 import visualization as vs
 import math 
 from scipy.signal import butter,filtfilt
+import statistic as stat
 
 #Camera setting
 camera_width,camera_height = 800,800
@@ -21,6 +22,8 @@ dist_rub = []
 grad_patient = []
 grad_wash = []
 grad_rub = []
+clean_hist = []
+
 
 #Staff status
 self_hygiene = False
@@ -36,6 +39,9 @@ cutoff = 2    #Cutoff frequency of the filter (Hz)
 nyq = 0.5*fs  #Nyquist rate
 order = 2     #order of LPF
 n = int(T*fs) #Total number of samples
+
+#Global thresholding
+patient_thresh = 200
 
 def butter_lowpass_filter(data,cutoff,fs,order):
     normal_cutoff = cutoff / nyq
@@ -122,7 +128,7 @@ for counter in range(0,max_num_record):
     grad_rub.append(e)
     grad_wash.append(f)
 
-
+    clean_hist.append(clean)
 
     cv2.imshow('Path Tracking:',image)
     cv2.setMouseCallback('Path Tracking:',color_info)  
@@ -137,10 +143,12 @@ grad_patient_np = np.array(grad_patient)
 grad_rub_np = np.array(grad_rub)
 grad_wash_np = np.array(grad_wash)
 
+#Distance after LPF
 LPF_patient = butter_lowpass_filter(dist_patient_np,cutoff,fs,order)
 LPF_rub = butter_lowpass_filter(dist_rub_np,cutoff,fs,order)
 LPF_wash = butter_lowpass_filter(dist_wash_np,cutoff,fs,order)
 
+#Gradients after LPF
 LPF_G_patient = butter_lowpass_filter(grad_patient_np,cutoff,fs,order)
 LPF_G_rub = butter_lowpass_filter(grad_rub_np,cutoff,fs,order)
 LPF_G_wash = butter_lowpass_filter(grad_rub_np,cutoff,fs,order)
@@ -154,6 +162,17 @@ vs.plot_all_distance_gradient(dist_patient,dist_rub,dist_wash,\
                             grad_patient,grad_rub,grad_wash,\
                             LPF_patient,LPF_rub,LPF_wash,\
                             LPF_G_patient,LPF_G_rub,LPF_G_wash)
+
+#5. Start counting
+min_paient, rub_wash, min_wash = stat.find_local_min(LPF_patient,LPF_rub,LPF_wash)
+#Find number of patient contacts
+patient_contact,patient_index = stat.global_thresholding(LPF_patient,patient_thresh,min_paient)
+#Determine compliance of patient contacts
+ok,fail = 0,0
+ok_patient,fail_patient = stat.serach_wash_record(patient_index,clean_hist)
+
+
+
 
 
 print("Done!")

@@ -12,8 +12,8 @@ log_file_path_2 = "/path_log.csv"
 
 #Index of csv file
 num_csv = 0
-#Starting and ending csv file
-i,j = 6,10
+#Starting and ending csv file [limited at most 5 files]
+i,j = 1,5
 
 def color_info(event,x,y,flag,param):
     #When Left is clicked in the mouse
