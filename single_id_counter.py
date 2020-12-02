@@ -5,11 +5,12 @@ import visualization as vs
 import math 
 from scipy.signal import butter,filtfilt
 import statistic as stat
+import matplotlib.pyplot as plt
 
 #Camera setting
 camera_width,camera_height = 800,800
 #Log file path
-log_file_path = "./log_file_1/path_log.csv"
+log_file_path = "./log_file_2/path_log.csv"
 #Location record
 locations = []
 #Total number of record
@@ -41,7 +42,10 @@ order = 2     #order of LPF
 n = int(T*fs) #Total number of samples
 
 #Global thresholding
-patient_thresh = 200
+patient_thresh = 220
+
+#Contact record merge
+contact_diff = 50
 
 def butter_lowpass_filter(data,cutoff,fs,order):
     normal_cutoff = cutoff / nyq
@@ -165,17 +169,24 @@ vs.plot_all_distance_gradient(dist_patient,dist_rub,dist_wash,\
 
 #5. Start counting
 min_paient, rub_wash, min_wash = stat.find_local_min(LPF_patient,LPF_rub,LPF_wash)
-#Find number of patient contacts
+#5A Find number of patient contacts
 patient_contact,patient_index = stat.global_thresholding(LPF_patient,patient_thresh,min_paient)
-#Determine compliance of patient contacts
-ok,fail = 0,0
-ok_patient,fail_patient = stat.serach_wash_record(patient_index,clean_hist)
+#5A Determine compliance of patient contacts
+ok_patient,fail_patient = 0,0
+ok_patient,fail_patient = stat.serach_wash_record(patient_index,clean_hist,contact_diff)
 
+#5B Determine compliance of staff leaving
+ok_leave,fail_leave = 0,0
+ok_leave,fail_leave = stat.search_leave_record(patient_index,clean_hist,max_num_record)
 
-
-
-
+#6. Terminal Result display
+print("Report:")
+print("Compliance [Patient]:{}   Incompliance [Patient]:{}".format(ok_patient,fail_patient))
+print("Compliance [Leave]  :{}   Incompliance [Leave]  :{}".format(ok_leave,fail_leave))
 print("Done!")
+
+plt.show()
+
 cv2.waitKey(0)
 cv2.destroyAllWindows
 

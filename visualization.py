@@ -155,5 +155,5 @@ def plot_all_distance_gradient(dist_patient,dist_rub,dist_wash,\
     mplcursors.cursor(line10)
     mplcursors.cursor(line11)
     mplcursors.cursor(line12)
-    
-    plt.show()
+
+  
