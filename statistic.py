@@ -34,7 +34,6 @@ def serach_wash_record(contact_index,clean_record,merge):
     contact_index = np.array(contact_index)
     n = contact_index.shape[0]
     print("Contact Vector:",contact_index)
-    #print(n)
 
     contact_ok = 0
     contact_fail = 0
@@ -72,7 +71,7 @@ def serach_wash_record(contact_index,clean_record,merge):
             i+=1
         #Consider consecutive contacts
         diff = contact_index[1] - contact_index[0]
-        if(diff <= merge):
+        if(diff >= merge):
             if(max(buffer)==1):
                 contact_ok += 1
             else:
@@ -99,7 +98,7 @@ def serach_wash_record(contact_index,clean_record,merge):
             i+=1
         #Consider consecutive contacts
         diff = contact_index[1] - contact_index[0]
-        if(diff <= merge):
+        if(diff >= merge):
             if(max(buffer)==1):
                 contact_ok += 1
             else:
@@ -113,7 +112,7 @@ def serach_wash_record(contact_index,clean_record,merge):
             i+=1
         #Consider consecutive contacts
         diff = contact_index[2] - contact_index[1]
-        if(diff <= merge):
+        if(diff >= merge):
             if(max(buffer)==1):
                 contact_ok += 1
             else:

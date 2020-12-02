@@ -12,7 +12,7 @@ import mqttsetup
 #Camera setting
 camera_width,camera_height = 800,800
 #Log file path
-log_file_path = "./log_file_1/path_log.csv"
+log_file_path = "./log_file_99/path_log.csv"
 #Location record
 locations = []
 #Total number of record
@@ -41,7 +41,7 @@ order = 2     #order of LPF
 n = int(T*fs) #Total number of samples
 
 #Global thresholding
-patient_thresh = 220
+patient_thresh = 250
 
 #Contact record merge
 contact_diff = 50
