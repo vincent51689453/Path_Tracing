@@ -6,11 +6,13 @@ import math
 from scipy.signal import butter,filtfilt
 import statistic as stat
 import matplotlib.pyplot as plt
+import paho.mqtt.client as mqtt
+import mqttsetup
 
 #Camera setting
 camera_width,camera_height = 800,800
 #Log file path
-log_file_path = "./log_file_2/path_log.csv"
+log_file_path = "./log_file_7/path_log.csv"
 #Location record
 locations = []
 #Total number of record
@@ -25,13 +27,10 @@ grad_wash = []
 grad_rub = []
 clean_hist = []
 
-
-#Staff status
-self_hygiene = False
-contact_compliance = 0
-contact_incompliance = 0
-leave_compliance = 0
-leave_incompliance = 0
+#MQTT Control
+MQTT_Enable = True
+MQTT_Dashboard_Topic = "MDSSCC/AIHH/gui_dashboard"
+MQTT_Server = "ia.ic.polyu.edu.hk"
 
 #low pass filter
 T = 5.0       #Sample period
@@ -183,7 +182,15 @@ ok_leave,fail_leave = stat.search_leave_record(patient_index,clean_hist,max_num_
 print("Report:")
 print("Compliance [Patient]:{}   Incompliance [Patient]:{}".format(ok_patient,fail_patient))
 print("Compliance [Leave]  :{}   Incompliance [Leave]  :{}".format(ok_leave,fail_leave))
-print("Done!")
+print("\r\n")
+
+#7. MQTT Publish to dashboard
+if(MQTT_Enable == True):
+    mqtt_node = mqttsetup.mqtt_client_setup(MQTT_Server)
+    message = mqttsetup.mqtt_message_generator(ok_patient,fail_patient,ok_leave,fail_leave)
+    mqttsetup.mqtt_publish_record(mqtt_node,MQTT_Dashboard_Topic,message)
+    print("MQTT Message Published")
+    print(message)
 
 plt.show()
 
