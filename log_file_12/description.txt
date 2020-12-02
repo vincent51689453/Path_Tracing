@@ -1,0 +1,5 @@
+Staff : Alex
+
+Sequence: ENTER -> TOUCH -> WASH -> TOUCH -> LEAVE
+
+Remark: one more compliance is counted

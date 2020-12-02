@@ -12,7 +12,7 @@ import mqttsetup
 #Camera setting
 camera_width,camera_height = 800,800
 #Log file path
-log_file_path = "./log_file_99/path_log.csv"
+log_file_path = "./log_file_12/path_log.csv"
 #Location record
 locations = []
 #Total number of record
@@ -28,7 +28,7 @@ grad_rub = []
 clean_hist = []
 
 #MQTT Control
-MQTT_Enable = False
+MQTT_Enable = True
 MQTT_Dashboard_Topic = "MDSSCC/AIHH/gui_dashboard"
 MQTT_Server = "ia.ic.polyu.edu.hk"
 
