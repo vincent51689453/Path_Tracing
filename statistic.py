@@ -126,13 +126,12 @@ def serach_wash_record(contact_index,clean_record,merge):
 def search_leave_record(contact_index,clean_record,total_sample):
     contact_index = np.array(contact_index)
     n = contact_index.shape[0]
-
+    ok = 0
+    fail = 0
+    last_contact_index = 0
+    buffer = []
     #If there is contact
     if(n > 0):
-        buffer = []
-        ok = 0
-        fail = 0
-
         last_contact_index = contact_index[-1]
         #Second wash record between last contact and last data
         for i in range(last_contact_index,total_sample):
