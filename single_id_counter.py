@@ -13,9 +13,8 @@ import mqttsetup
 #Camera setting
 camera_width,camera_height = 800,800
 #Log file path
-log_file_path = "./dataset/log_file_11/path_log.csv"
+log_file_path = "./dataset/log_file_13/path_log.csv"
 record_file_path = "result_buffer.csv"
-clear_file_path = "./dataset/test_log.csv"
 #Location record
 locations = []
 #Total number of record
@@ -50,7 +49,7 @@ patient_thresh = 250
 contact_diff = 50
 
 #Visualization Control
-Plotting_enable = False
+Plotting_enable = True
 
 def butter_lowpass_filter(data,cutoff,fs,order):
     normal_cutoff = cutoff / nyq
@@ -78,7 +77,7 @@ def orientation(self_x,self_y,zone_x,zone_y):
         theta = np.rad2deg(math.atan(y/x))+90
     #Quadrant III (180-270)
     if((self_x>zone_x)and(self_y<=zone_y)):
-        theta = np.rad2deg(math.atan(y/x))+180
+        theta = np.rad2deg(math.atan(x/y))+180
     #Quadrant IV (270-360)
     if((self_x>zone_x)and(self_y>=zone_y)):
         theta = np.rad2deg(math.atan(y/x))+270
