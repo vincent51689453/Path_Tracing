@@ -7,7 +7,7 @@ import math
 #Camera setting
 camera_width,camera_height = 800,800
 #Log file path
-log_file_path_1 = "./log_file_"
+log_file_path_1 = "./dataset/log_file_"
 log_file_path_2 = "/path_log.csv"
 
 #Index of csv file

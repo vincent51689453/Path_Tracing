@@ -14,7 +14,7 @@ from datetime import datetime
 #Camera setting
 camera_width,camera_height = 800,800
 #Log file path
-log_file_path = "./dataset/log_file_33/path_log.csv"
+log_file_path = "./dataset/log_file_42/path_log.csv"
 record_file_path = "result_buffer.csv"
 #Location record
 locations = []
@@ -47,7 +47,7 @@ n = int(T*fs) #Total number of samples
 patient_thresh = 250
 
 #Contact record merge
-contact_diff = 50
+contact_diff = 40
 
 #Visualization Control
 Plotting_enable = True
