@@ -21,6 +21,9 @@ Some parameters can be adjusted to improve the accuracy:
 
 - single_id_counter.py -> patient_thresh -> It is the threshold distance between staff and patient
 
+- single_id_counter.py -> MQTT_Enable -> It helps to ENABLE/DISABLE the MQTT process
+
 - statistic.py -> theta_1 & theta_2 -> They are the orientation limitations of filtering patient contacts.
+
 
 ![image](https://github.com/vincent51689453/Path_Tracing/blob/main/output/Text_output.PNG)
