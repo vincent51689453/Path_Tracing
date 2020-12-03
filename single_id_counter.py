@@ -15,6 +15,7 @@ camera_width,camera_height = 800,800
 #Log file path
 log_file_path = "./dataset/log_file_11/path_log.csv"
 record_file_path = "result_buffer.csv"
+clear_file_path = "./dataset/test_log.csv"
 #Location record
 locations = []
 #Total number of record
@@ -207,11 +208,17 @@ print("\r\n")
 #7. Read previous history
 with open(record_file_path) as history_file:
     dummy = []
+    old_ok_p = 0
+    old_fail_p = 0
+    old_ok_leave = 0
+    old_fail_leave = 0
     log_history = csv.reader(history_file)
     for row_record in log_history:
-        dummy.append(row_record)
+        old_ok_p += int(row_record[0])
+        old_fail_p +=  int(row_record[1])
+        old_ok_leave +=  int(row_record[2])
+        old_fail_leave +=  int(row_record[3])
 
-old_ok_p,old_fail_p,old_ok_leave,old_fail_leave = dummy[-1]
 
 #8. MQTT Publish to dashboard
 if(MQTT_Enable == True):
@@ -231,6 +238,11 @@ if(MQTT_Enable == True):
 with open(record_file_path,'a',newline='') as log_result:
     log_writer = csv.writer(log_result)
     log_writer.writerow([ok_patient,fail_patient,ok_leave,fail_leave])
+
+#10. Clean path_log.csv
+with open(clear_file_path,'w',newline='') as log_clear:
+    log_writer = csv.writer(log_clear)
+    log_writer.writerow([0,0,0,0,0,0,0,0])
 
 plt.show()
 
