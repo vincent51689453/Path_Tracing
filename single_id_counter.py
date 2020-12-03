@@ -71,20 +71,29 @@ def orientation(self_x,self_y,zone_x,zone_y):
     y = abs(self_y-zone_y)
     #Quadrant I (0-90)
     if((self_x<=zone_x)and(self_y>zone_y)):
-        theta = np.rad2deg(math.atan(x/y))
+        if(y!=0):
+            theta = np.rad2deg(math.atan(x/y))
+        else:
+            theta = 0
     #Quadrant II (90-180)
     if((self_x<zone_x)and(self_y<=zone_y)):
-        theta = np.rad2deg(math.atan(y/x))+90
+        if(x!=0):
+            theta = np.rad2deg(math.atan(y/x))+90
+        else:
+            theta = 0
     #Quadrant III (180-270)
     if((self_x>zone_x)and(self_y<=zone_y)):
-        theta = np.rad2deg(math.atan(x/y))+180
+        if(y!=0):
+            theta = np.rad2deg(math.atan(x/y))+180
+        else:
+            theta = 0
     #Quadrant IV (270-360)
     if((self_x>zone_x)and(self_y>=zone_y)):
-        theta = np.rad2deg(math.atan(y/x))+270
+        if(x!=0):
+            theta = np.rad2deg(math.atan(y/x))+270
+        else:
+            theta = 0
 
-    #Exceptional for atan
-    if((y == 0)or(x == 0)):
-        theta = 0
     return theta
 
 

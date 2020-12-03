@@ -19,7 +19,7 @@ def global_thresholding(data_list,thresh,index_list,orientation_list):
     local_minima = []
     output_index = []
     #Measured theta limit
-    theta_1, theta_2 = 130,220
+    theta_1, theta_2 = 160,200
     #Get all the minima based on the index list
     for counter in range(0,n):
         index = a[counter]
