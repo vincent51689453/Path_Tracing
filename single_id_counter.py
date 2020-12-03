@@ -13,7 +13,7 @@ import mqttsetup
 #Camera setting
 camera_width,camera_height = 800,800
 #Log file path
-log_file_path = "./log_file_11/path_log.csv"
+log_file_path = "./dataset/log_file_11/path_log.csv"
 #Location record
 locations = []
 #Total number of record
