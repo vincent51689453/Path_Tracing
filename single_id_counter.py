@@ -14,6 +14,7 @@ import mqttsetup
 camera_width,camera_height = 800,800
 #Log file path
 log_file_path = "./dataset/log_file_11/path_log.csv"
+record_file_path = "result_buffer.csv"
 #Location record
 locations = []
 #Total number of record
@@ -48,7 +49,7 @@ patient_thresh = 250
 contact_diff = 50
 
 #Visualization Control
-Plotting_enable = True
+Plotting_enable = False
 
 def butter_lowpass_filter(data,cutoff,fs,order):
     normal_cutoff = cutoff / nyq
@@ -198,18 +199,38 @@ ok_leave,fail_leave = 0,0
 ok_leave,fail_leave = stat.search_leave_record(patient_index,clean_hist,max_num_record)
 
 #6. Terminal Result display
-print("Report:")
+print("Report of this iteration:")
 print("Compliance [Patient]:{}   Incompliance [Patient]:{}".format(ok_patient,fail_patient))
 print("Compliance [Leave]  :{}   Incompliance [Leave]  :{}".format(ok_leave,fail_leave))
 print("\r\n")
 
-#7. MQTT Publish to dashboard
+#7. Read previous history
+with open(record_file_path) as history_file:
+    dummy = []
+    log_history = csv.reader(history_file)
+    for row_record in log_history:
+        dummy.append(row_record)
+
+old_ok_p,old_fail_p,old_ok_leave,old_fail_leave = dummy[-1]
+
+#8. MQTT Publish to dashboard
 if(MQTT_Enable == True):
+    #Publish
+    a = int(old_ok_p) + ok_patient
+    b = int(old_fail_p) + fail_patient
+    c = int(old_ok_leave) + ok_leave
+    d = int(old_fail_leave) + fail_leave
+
     mqtt_node = mqttsetup.mqtt_client_setup(MQTT_Server)
-    message = mqttsetup.mqtt_message_generator(ok_patient,fail_patient,ok_leave,fail_leave)
+    message = mqttsetup.mqtt_message_generator(a,b,c,d)
     mqttsetup.mqtt_publish_record(mqtt_node,MQTT_Dashboard_Topic,message)
     print("MQTT Message Published")
     print(message)
+
+#9. Save to CSV
+with open(record_file_path,'a',newline='') as log_result:
+    log_writer = csv.writer(log_result)
+    log_writer.writerow([ok_patient,fail_patient,ok_leave,fail_leave])
 
 plt.show()
 
