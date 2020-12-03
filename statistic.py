@@ -18,8 +18,9 @@ def global_thresholding(data_list,thresh,index_list,orientation_list):
     a = index_list[0]
     local_minima = []
     output_index = []
+    orientation_vector = []
     #Measured theta limit
-    theta_1, theta_2 = 160,200
+    theta_1, theta_2 = 140,220
     #Get all the minima based on the index list
     for counter in range(0,n):
         index = a[counter]
@@ -27,10 +28,12 @@ def global_thresholding(data_list,thresh,index_list,orientation_list):
         if(data_list[index]<= thresh):
             #Orientation limit
             if((orientation_list[index]<=theta_1)or(orientation_list[index]>=theta_2)):
+                orientation_vector.append(orientation_list[index])
                 local_minima.append(data_list[index])
                 output_index.append(index)
 
     local_minima = np.array(local_minima)
+    print("Orientation Vector:",orientation_vector)
     return local_minima,output_index
 
 def serach_wash_record(contact_index,clean_record,merge):
@@ -123,6 +126,66 @@ def serach_wash_record(contact_index,clean_record,merge):
                 contact_fail += 1
         i = 0
         buffer = []
+
+        #Four contacts
+    
+    #Four contacts
+    if(n == 4):
+        #1
+        while(i<contact_index[0]):
+            buffer.append(clean_record[i])
+            i+=1
+        if(max(buffer)==1):
+            contact_ok += 1
+        else:
+            contact_fail += 1
+
+        #2
+        i = contact_index[0]
+        buffer = []
+        while(i<contact_index[1]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[1] - contact_index[0]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+
+        #3
+        i = contact_index[1]
+        buffer = []
+        while(i<contact_index[2]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[2] - contact_index[1]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+
+        #4
+        i = contact_index[2]
+        buffer = []
+        while(i<contact_index[3]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[3] - contact_index[2]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+
+        buffer = []
+
     
     return contact_ok,contact_fail
 

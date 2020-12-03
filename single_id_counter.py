@@ -14,7 +14,7 @@ from datetime import datetime
 #Camera setting
 camera_width,camera_height = 800,800
 #Log file path
-log_file_path = "./dataset/log_file_15/path_log.csv"
+log_file_path = "./dataset/log_file_33/path_log.csv"
 record_file_path = "result_buffer.csv"
 #Location record
 locations = []
