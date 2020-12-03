@@ -239,11 +239,6 @@ with open(record_file_path,'a',newline='') as log_result:
     log_writer = csv.writer(log_result)
     log_writer.writerow([ok_patient,fail_patient,ok_leave,fail_leave])
 
-#10. Clean path_log.csv
-with open(clear_file_path,'w',newline='') as log_clear:
-    log_writer = csv.writer(log_clear)
-    log_writer.writerow([0,0,0,0,0,0,0,0])
-
 plt.show()
 
 cv2.waitKey(0)
