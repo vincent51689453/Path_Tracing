@@ -12,19 +12,23 @@ def find_local_min(patient,wash_bin,hand_rub):
 
     return patient_index_list,bin_index_list,hand_index_list
 
-def global_thresholding(data_list,thresh,index_list):
+def global_thresholding(data_list,thresh,index_list,orientation_list):
     #Find out the True minima based on thresholding approach
     n = len(index_list[0])
     a = index_list[0]
     local_minima = []
     output_index = []
+    #Measured theta limit
+    theta_1, theta_2 = 152,241
     #Get all the minima based on the index list
     for counter in range(0,n):
         index = a[counter]
         #Thresholding
         if(data_list[index]<= thresh):
             local_minima.append(data_list[index])
-            output_index.append(index)
+            #Orientation limit
+            if((orientation_list[index]<=theta_1)or(orientation_list[index]>=theta_2)):
+                output_index.append(index)
 
     local_minima = np.array(local_minima)
     return local_minima,output_index

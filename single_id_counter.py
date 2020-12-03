@@ -9,10 +9,11 @@ import matplotlib.pyplot as plt
 import paho.mqtt.client as mqtt
 import mqttsetup
 
+
 #Camera setting
 camera_width,camera_height = 800,800
 #Log file path
-log_file_path = "./log_file_12/path_log.csv"
+log_file_path = "./log_file_11/path_log.csv"
 #Location record
 locations = []
 #Total number of record
@@ -59,23 +60,36 @@ def distance_calculation(self_x,self_y):
     self_2_rub = math.sqrt((self_x-vs.mid_x_alchol)**2+(self_y-vs.mid_y_alchol)**2)
     return self_2_patient,self_2_rub,self_2_wash
 
+def orientation(self_x,self_y,zone_x,zone_y):
+    #Remember it is based on opencv image coordinates system
+    theta = 0
+    x = abs(self_x-zone_x)
+    y = abs(self_y-zone_y)
+    #Quadrant I (0-90)
+    if((self_x<=zone_x)and(self_y>zone_y)):
+        theta = np.rad2deg(math.atan(x/y))
+    #Quadrant II (90-180)
+    if((self_x<zone_x)and(self_y<=zone_y)):
+        theta = np.rad2deg(math.atan(y/x))+90
+    #Quadrant III (180-270)
+    if((self_x>zone_x)and(self_y<=zone_y)):
+        theta = np.rad2deg(math.atan(y/x))+180
+    #Quadrant IV (270-360)
+    if((self_x>zone_x)and(self_y>=zone_y)):
+        theta = np.rad2deg(math.atan(y/x))+270
+
+    #Exceptional for atan
+    if((y == 0)or(x == 0)):
+        theta = 0
+    return theta
+
+
 def gradient_calculation(self_x,self_y):
-    #factor is a scaling factor
-    factor = 5
-    if(self_x!=vs.mid_x_patient):
-        self_2_patient = (self_y-vs.mid_y_patient)/(self_x-vs.mid_x_patient)*factor
-    else:
-        self_2_patient = 0
+    #Calculate orientations of each zone with respect to each point
+    self_2_patient = orientation(self_x,self_y,vs.mid_x_patient,vs.mid_y_patient)
+    self_2_rub = orientation(self_x,self_y,vs.mid_x_alchol,vs.mid_y_alchol)
+    self_2_wash = orientation(self_x,self_y,vs.mid_x_clean,vs.mid_y_clean)
 
-    if(self_x!=vs.mid_x_clean):
-        self_2_wash = (self_y-vs.mid_y_clean)/(self_x-vs.mid_x_clean)*factor
-    else:
-        self_2_wash = 0
-
-    if(self_x!=vs.mid_x_alchol):
-        self_2_rub = (self_y-vs.mid_y_alchol)/(self_x-vs.mid_x_alchol)*factor
-    else:
-        self_2_rub = 0
     return self_2_patient,self_2_rub,self_2_wash    
 
 def color_info(event,x,y,flag,param):
@@ -169,7 +183,7 @@ vs.plot_all_distance_gradient(dist_patient,dist_rub,dist_wash,\
 #5. Start counting
 min_paient, rub_wash, min_wash = stat.find_local_min(LPF_patient,LPF_rub,LPF_wash)
 #5A Find number of patient contacts
-patient_contact,patient_index = stat.global_thresholding(LPF_patient,patient_thresh,min_paient)
+patient_contact,patient_index = stat.global_thresholding(LPF_patient,patient_thresh,min_paient,LPF_G_patient)
 #5A Determine compliance of patient contacts
 ok_patient,fail_patient = 0,0
 ok_patient,fail_patient = stat.serach_wash_record(patient_index,clean_hist,contact_diff)
