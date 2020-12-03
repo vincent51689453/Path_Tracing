@@ -8,6 +8,7 @@ import statistic as stat
 import matplotlib.pyplot as plt
 import paho.mqtt.client as mqtt
 import mqttsetup
+from datetime import datetime
 
 
 #Camera setting
@@ -244,8 +245,10 @@ if(MQTT_Enable == True):
 
 #9. Save to CSV
 with open(record_file_path,'a',newline='') as log_result:
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
     log_writer = csv.writer(log_result)
-    log_writer.writerow([ok_patient,fail_patient,ok_leave,fail_leave])
+    log_writer.writerow([ok_patient,fail_patient,ok_leave,fail_leave,current_time])
 
 plt.show()
 
