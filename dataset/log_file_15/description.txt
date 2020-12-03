@@ -1,0 +1,5 @@
+Staff : Catherine
+
+Sequence: Enter->Touch[C1]->Hand Wash->Touch[C3] -> Leave
+
+Remark: Missed Touch C3

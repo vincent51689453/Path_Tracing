@@ -1,0 +1,5 @@
+Staff : Dr.Cheung
+
+Sequence: Enter -> Hand Wash -> Touch [C3] -> Touch [C1] -> Hand Rub-> Leave
+
+Remark: Missed Touch C3

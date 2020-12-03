@@ -1,0 +1,5 @@
+Staff : Louis
+
+Sequence: Enter->Touch[C1]->Hand Rub->Touch[C3] -> Hand Wash->Leave
+
+Remark: missed Touch[C3]
