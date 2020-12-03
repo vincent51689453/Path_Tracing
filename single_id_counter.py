@@ -47,6 +47,9 @@ patient_thresh = 250
 #Contact record merge
 contact_diff = 50
 
+#Visualization Control
+Plotting_enable = True
+
 def butter_lowpass_filter(data,cutoff,fs,order):
     normal_cutoff = cutoff / nyq
     # Get the filter coefficients 
@@ -147,9 +150,10 @@ for counter in range(0,max_num_record):
 
     clean_hist.append(clean)
 
-    cv2.imshow('Path Tracking:',image)
-    cv2.setMouseCallback('Path Tracking:',color_info)  
-    cv2.waitKey(50)
+    if(Plotting_enable):
+        cv2.imshow('Path Tracking:',image)
+        cv2.setMouseCallback('Path Tracking:',color_info)  
+        cv2.waitKey(50)
 
 
 #3. Low pass filter after go through all the data
@@ -175,10 +179,11 @@ LPF_G_wash = butter_lowpass_filter(grad_rub_np,cutoff,fs,order)
 #vs.plot_all_distance(dist_patient,dist_rub,dist_wash)
 
 #4. Plot distances / gradients / LPF
-vs.plot_all_distance_gradient(dist_patient,dist_rub,dist_wash,\
-                            grad_patient,grad_rub,grad_wash,\
-                            LPF_patient,LPF_rub,LPF_wash,\
-                            LPF_G_patient,LPF_G_rub,LPF_G_wash)
+if(Plotting_enable):
+    vs.plot_all_distance_gradient(dist_patient,dist_rub,dist_wash,\
+                                grad_patient,grad_rub,grad_wash,\
+                                LPF_patient,LPF_rub,LPF_wash,\
+                                LPF_G_patient,LPF_G_rub,LPF_G_wash)
 
 #5. Start counting
 min_paient, rub_wash, min_wash = stat.find_local_min(LPF_patient,LPF_rub,LPF_wash)
