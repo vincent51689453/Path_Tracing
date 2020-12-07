@@ -20,17 +20,20 @@ def global_thresholding(data_list,thresh,index_list,orientation_list):
     output_index = []
     orientation_vector = []
     #Measured theta limit
-    theta_1, theta_2 = 160,220
+    theta_1, theta_2 = 160,200
     #Get all the minima based on the index list
     for counter in range(0,n):
         index = a[counter]
         #Thresholding
         if(data_list[index]<= thresh):
+            #print("Index:{}  Value:{} Dir:{}".format(index,data_list[index],orientation_list[index]))
             #Orientation limit
-            #if((orientation_list[index]<=theta_1)or(orientation_list[index]>=theta_2)):
-            orientation_vector.append(orientation_list[index])
-            local_minima.append(data_list[index])
-            output_index.append(index)
+            if((orientation_list[index]<=theta_1)or(orientation_list[index]>=theta_2)):
+                
+                print(orientation_list[index])
+                orientation_vector.append(orientation_list[index])
+                local_minima.append(data_list[index])
+                output_index.append(index)
 
     local_minima = np.array(local_minima)
     print("Orientation Vector:",orientation_vector)

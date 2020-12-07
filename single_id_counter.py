@@ -14,7 +14,7 @@ from datetime import datetime
 #Camera setting
 camera_width,camera_height = 800,800
 #Log file path
-log_file_path = "./dataset/log_file_42/path_log.csv"
+log_file_path = "./dataset/log_file_99/path_log.csv"
 record_file_path = "result_buffer.csv"
 #Location record
 locations = []
@@ -31,7 +31,7 @@ grad_rub = []
 clean_hist = []
 
 #MQTT Control
-MQTT_Enable = True
+MQTT_Enable = False
 MQTT_Dashboard_Topic = "MDSSCC/AIHH/gui_dashboard"
 MQTT_Server = "ia.ic.polyu.edu.hk"
 
@@ -50,7 +50,7 @@ patient_thresh = 250
 contact_diff = 40
 
 #Visualization Control
-Plotting_enable = True
+Plotting_enable = False
 
 def butter_lowpass_filter(data,cutoff,fs,order):
     normal_cutoff = cutoff / nyq
