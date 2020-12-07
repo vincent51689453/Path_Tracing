@@ -190,7 +190,264 @@ def serach_wash_record(contact_index,clean_record,merge):
 
         buffer = []
 
-    
+    if(n == 5):
+        #1
+        while(i<contact_index[0]):
+            buffer.append(clean_record[i])
+            i+=1
+        if(max(buffer)==1):
+            contact_ok += 1
+        else:
+            contact_fail += 1
+
+        #2
+        i = contact_index[0]
+        buffer = []
+        while(i<contact_index[1]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[1] - contact_index[0]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+
+        #3
+        i = contact_index[1]
+        buffer = []
+        while(i<contact_index[2]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[2] - contact_index[1]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+
+        #4
+        i = contact_index[2]
+        buffer = []
+        while(i<contact_index[3]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[3] - contact_index[2]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+
+        #5
+        i = contact_index[3]
+        buffer = []
+        while(i<contact_index[4]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[4] - contact_index[3]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+        buffer = []
+
+    if(n == 6):
+        #1
+        while(i<contact_index[0]):
+            buffer.append(clean_record[i])
+            i+=1
+        if(max(buffer)==1):
+            contact_ok += 1
+        else:
+            contact_fail += 1
+
+        #2
+        i = contact_index[0]
+        buffer = []
+        while(i<contact_index[1]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[1] - contact_index[0]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+
+        #3
+        i = contact_index[1]
+        buffer = []
+        while(i<contact_index[2]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[2] - contact_index[1]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+
+        #4
+        i = contact_index[2]
+        buffer = []
+        while(i<contact_index[3]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[3] - contact_index[2]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+
+        #5
+        i = contact_index[3]
+        buffer = []
+        while(i<contact_index[4]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[4] - contact_index[3]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+        buffer = []
+
+        #6
+        i = contact_index[4]
+        buffer = []
+        while(i<contact_index[5]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[5] - contact_index[4]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+        buffer = []
+
+    if(n == 7):
+        #1
+        while(i<contact_index[0]):
+            buffer.append(clean_record[i])
+            i+=1
+        if(max(buffer)==1):
+            contact_ok += 1
+        else:
+            contact_fail += 1
+
+        #2
+        i = contact_index[0]
+        buffer = []
+        while(i<contact_index[1]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[1] - contact_index[0]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+
+        #3
+        i = contact_index[1]
+        buffer = []
+        while(i<contact_index[2]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[2] - contact_index[1]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+
+        #4
+        i = contact_index[2]
+        buffer = []
+        while(i<contact_index[3]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[3] - contact_index[2]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+
+        #5
+        i = contact_index[3]
+        buffer = []
+        while(i<contact_index[4]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[4] - contact_index[3]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+        buffer = []
+
+        #6
+        i = contact_index[4]
+        buffer = []
+        while(i<contact_index[5]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[5] - contact_index[4]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+        buffer = []
+
+        #7
+        i = contact_index[5]
+        buffer = []
+        while(i<contact_index[6]):
+            buffer.append(clean_record[i])
+            i+=1
+        #Consider consecutive contacts
+        diff = contact_index[6] - contact_index[5]
+        if(diff >= merge):
+            if(max(buffer)==1):
+                contact_ok += 1
+            else:
+                contact_fail += 1
+        i = 0
+        buffer = []
+
     return contact_ok,contact_fail
 
 def search_leave_record(contact_index,clean_record,total_sample):
