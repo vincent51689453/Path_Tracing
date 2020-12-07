@@ -24,6 +24,7 @@ def global_thresholding(data_list,thresh,index_list,orientation_list):
     #Get all the minima based on the index list
     for counter in range(0,n):
         index = a[counter]
+        #print("Index:{}  Value:{} Dir:{}".format(index,data_list[index],orientation_list[index]))
         #Thresholding
         if(data_list[index]<= thresh):
             #print("Index:{}  Value:{} Dir:{}".format(index,data_list[index],orientation_list[index]))

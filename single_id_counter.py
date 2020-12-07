@@ -40,7 +40,7 @@ T = 5.0       #Sample period
 fs = 30.0     #Sample Rate (Hz)
 cutoff = 2    #Cutoff frequency of the filter (Hz)
 nyq = 0.5*fs  #Nyquist rate
-order = 2     #order of LPF
+order = 5     #order of LPF
 n = int(T*fs) #Total number of samples
 
 #Global thresholding
@@ -50,7 +50,7 @@ patient_thresh = 250
 contact_diff = 40
 
 #Visualization Control
-Plotting_enable = False
+Plotting_enable = True
 
 def butter_lowpass_filter(data,cutoff,fs,order):
     normal_cutoff = cutoff / nyq
@@ -199,7 +199,7 @@ if(Plotting_enable):
 #5. Start counting
 min_paient, rub_wash, min_wash = stat.find_local_min(LPF_patient,LPF_rub,LPF_wash)
 #5A Find number of patient contacts
-patient_contact,patient_index = stat.global_thresholding(LPF_patient,patient_thresh,min_paient,LPF_G_patient)
+patient_contact,patient_index = stat.global_thresholding(LPF_patient,patient_thresh,min_paient,LPF_patient)
 #5A Determine compliance of patient contacts
 ok_patient,fail_patient = 0,0
 ok_patient,fail_patient = stat.serach_wash_record(patient_index,clean_hist,contact_diff)
