@@ -29,15 +29,15 @@ def global_thresholding(data_list,thresh,index_list,orientation_list):
         if(data_list[index]<= thresh):
             #print("Index:{}  Value:{} Dir:{}".format(index,data_list[index],orientation_list[index]))
             #Orientation limit
-            if((orientation_list[index]<=theta_1)or(orientation_list[index]>=theta_2)):
-                
-                print(orientation_list[index])
+            if((orientation_list[index]<=theta_1)or(orientation_list[index]>=theta_2)): 
+                #print(orientation_list[index])
                 orientation_vector.append(orientation_list[index])
                 local_minima.append(data_list[index])
                 output_index.append(index)
 
-    local_minima = np.array(local_minima)
     print("Orientation Vector:",orientation_vector)
+    print("Distance Vector:",local_minima)
+    local_minima = np.array(local_minima)
     return local_minima,output_index
 
 def serach_wash_record(contact_index,clean_record,merge):

@@ -50,7 +50,7 @@ patient_thresh = 250
 contact_diff = 180
 
 #Visualization Control
-Plotting_enable = False
+Plotting_enable = True
 
 def butter_lowpass_filter(data,cutoff,fs,order):
     normal_cutoff = cutoff / nyq
