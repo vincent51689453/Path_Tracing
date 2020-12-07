@@ -50,7 +50,7 @@ patient_thresh = 250
 contact_diff = 40
 
 #Visualization Control
-Plotting_enable = True
+Plotting_enable = False
 
 def butter_lowpass_filter(data,cutoff,fs,order):
     normal_cutoff = cutoff / nyq
@@ -199,7 +199,7 @@ if(Plotting_enable):
 #5. Start counting
 min_paient, rub_wash, min_wash = stat.find_local_min(LPF_patient,LPF_rub,LPF_wash)
 #5A Find number of patient contacts
-patient_contact,patient_index = stat.global_thresholding(LPF_patient,patient_thresh,min_paient,LPF_patient)
+patient_contact,patient_index = stat.global_thresholding(LPF_patient,patient_thresh,min_paient,grad_patient)
 #5A Determine compliance of patient contacts
 ok_patient,fail_patient = 0,0
 ok_patient,fail_patient = stat.serach_wash_record(patient_index,clean_hist,contact_diff)
