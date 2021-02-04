@@ -39,6 +39,7 @@ def on_message(client, userdata, msg):
     else:
         inside = 30
     if((loc_x == 9999)and(loc_y == 9999)):
+        #{"x":"9999","y":"9999"}
         inside = 99
 
 
@@ -52,8 +53,10 @@ def on_message(client, userdata, msg):
         elif(door_status == 1):
             diff = datetime.datetime.strptime(str(now), datetimeFormat)\
                 - datetime.datetime.strptime(str(start_time_in), datetimeFormat)
-            print("Diff Time [IN]in {}s".format(diff.seconds))
-            if(int(diff.seconds)>=in_time):
+            total_diff = diff.seconds+(diff.microseconds/1000000)
+
+            print("Diff Time [IN]in {}s".format(total_diff))
+            if(total_diff>=in_time):
                 print("[INFO] System start analyzing at index {}\r\n".format(data_index))
                 # START ANALYZE
                 door_status = 2
@@ -62,8 +65,9 @@ def on_message(client, userdata, msg):
         else:
             diff = datetime.datetime.strptime(str(now), datetimeFormat)\
                 - datetime.datetime.strptime(str(start_time_out), datetimeFormat)
-            print("Diff Time [OUT]in {}s".format(diff.seconds))
-            if(int(diff.seconds)>=out_time):
+            total_diff = diff.seconds+(diff.microseconds/1000000)
+            print("Diff Time [OUT]in {}s".format(total_diff))
+            if(total_diff>=out_time):
                 # START ANALYZE
                 door_status = 0
 
