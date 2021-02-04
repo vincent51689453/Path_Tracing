@@ -5,12 +5,13 @@ import time
 import datetime
 from datetime import timedelta
 import visualization as vs
-
+import os
+from shutil import copyfile
 # 0 :IDLE
 # 1 :START COUNTING
 # 2 :START ANALYZE 
 door_status = 0
-in_time = 36
+in_time = 34
 out_time = 2
 start_time_in = 'x'
 start_time_out = 'x'
@@ -49,15 +50,17 @@ def on_message(client, userdata, msg):
             door_status = 1
             start_time_in = now 
             print("[INFO] System start counting at index {}\r\n".format(data_index))
+            copyfile('path_emp.csv','path_log.csv')
 
         elif(door_status == 1):
             diff = datetime.datetime.strptime(str(now), datetimeFormat)\
                 - datetime.datetime.strptime(str(start_time_in), datetimeFormat)
             total_diff = diff.seconds+(diff.microseconds/1000000)
 
-            print("Diff Time [IN]in {}s".format(total_diff))
+            print("Diff Time [IN]in {}s\r\n".format(total_diff))
             if(total_diff>=in_time):
                 print("[INFO] System start analyzing at index {}\r\n".format(data_index))
+                os.system('python single_id_counter3.py')
                 # START ANALYZE
                 door_status = 2
                 start_time_out = now
@@ -66,7 +69,7 @@ def on_message(client, userdata, msg):
             diff = datetime.datetime.strptime(str(now), datetimeFormat)\
                 - datetime.datetime.strptime(str(start_time_out), datetimeFormat)
             total_diff = diff.seconds+(diff.microseconds/1000000)
-            print("Diff Time [OUT]in {}s".format(total_diff))
+            print("Diff Time [OUT]in {}s\r\n".format(total_diff))
             if(total_diff>=out_time):
                 # START ANALYZE
                 door_status = 0

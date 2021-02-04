@@ -16,7 +16,8 @@ import time
 #Camera setting
 camera_width,camera_height = 1200,980
 #Log file path
-log_file_path= "path_log.csv"
+log_file_path = "path_log_qe_backup.csv"
+output_path = "path_log.csv"
 Plotting_enable = True # True/False
 MQTT_Enable = True
 #Location record
@@ -32,6 +33,7 @@ grad_patient = []
 grad_wash = []
 grad_rub = []
 clean_hist = []
+
 
 #MQTT Control
 MQTT_Dashboard_Topic = "MDSSCC/POINTS"
@@ -51,8 +53,8 @@ with open(log_file_path) as log_file:
     log_analyzer = csv.reader(log_file)
     df_list=[]
     for row in log_analyzer:
-        #Set visulization range for testing
-        if(max_num_record <= 120):
+        #Set visulization range for testing, set extreme large number to disable
+        if(max_num_record <= 9999):
             loc_x, loc_y, clean = row[1],row[2],row[6]
             df_list.append((int(row[0]),int(row[1]),int(row[2]),int(row[6])))
             #Store every (x,y,clean) for every ID
@@ -87,6 +89,7 @@ for counter in range(0,max_num_record):
     #Indicating other points (Green)
     image[loc_y:(loc_y+vs.pixel_offset),loc_x:(loc_x+vs.pixel_offset)] = vs.label_pixel_color[0]
 
+
     if(MQTT_Enable == True):
         #Publish locations
         mqtt_node = mqttsetup.mqtt_client_setup(MQTT_Server)
@@ -95,6 +98,10 @@ for counter in range(0,max_num_record):
         print("MQTT Message Published [{}]".format(packet_index))
         packet_index+=1
         print(message)
+    
+    with open('path_log.csv','a',newline='') as csv_log_file:
+        log_writer=csv.writer(csv_log_file)
+        log_writer.writerow([int(0),loc_x,loc_y,int(100),int(100),int(100),int(clean),int(0)])
 
     if(Plotting_enable):
         cv2.imshow('Path Tracking:',image)
