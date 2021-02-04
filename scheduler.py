@@ -61,6 +61,9 @@ def on_message(client, userdata, msg):
             if(total_diff>=in_time):
                 print("[INFO] System start analyzing at index {}\r\n".format(data_index))
                 os.system('python single_id_counter3.py')
+                #Backup_file
+                file_backup_name = 'path_backup_' + str(data_index) + '.csv'
+                copyfile('path_log.csv',file_backup_name)
                 # START ANALYZE
                 door_status = 2
                 start_time_out = now
